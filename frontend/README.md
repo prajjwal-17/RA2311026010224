@@ -43,8 +43,6 @@ The shared logging package is located in `../logging_middleware`.
 
 ## Architecture
 
-Use the following Mermaid source to generate the architecture image for submission:
-
 ```mermaid
 flowchart LR
     U[User Browser] --> UI[Next.js App Router UI\nDashboard + Priority Inbox]
@@ -67,10 +65,6 @@ flowchart LR
     HP --> UI
     LS --> UI
 ```
-
-Architecture image placeholder:
-
-![Project architecture placeholder](../output_images/architecture-placeholder.png)
 
 ## Screenshots
 

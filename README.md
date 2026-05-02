@@ -116,8 +116,6 @@ In this project, logging is used across:
 
 ## System Architecture
 
-Below is a cleaner layered Mermaid architecture diagram that renders better on GitHub and is easier to read in the README.
-
 ```mermaid
 flowchart TB
     user[Candidate / Reviewer]
@@ -151,12 +149,6 @@ flowchart TB
     logger --> logs
     heap --> ui
 ```
-
-Architecture image placeholder for submission:
-
-![Architecture diagram placeholder](./output_images/architecture-diagram-placeholder.png)
-
-When the Mermaid diagram is rendered as an image, it can replace the placeholder path above.
 
 ## Request Flow
 
