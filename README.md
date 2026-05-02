@@ -116,33 +116,40 @@ In this project, logging is used across:
 
 ## System Architecture
 
-Below is a Mermaid container-style architecture diagram for the project.
+Below is a cleaner layered Mermaid architecture diagram that renders better on GitHub and is easier to read in the README.
 
 ```mermaid
-C4Container
-    title Campus Notifications Frontend Architecture
+flowchart TB
+    user[Candidate / Reviewer]
 
-    Person(user, "Candidate / Reviewer", "Uses the notifications dashboard in the browser")
+    subgraph client[Client Layer]
+        ui[Dashboard UI<br/>Priority Inbox]
+        state[Notifications Context<br/>Hooks + Reducer]
+        storage[Local Storage<br/>Read / Unread IDs]
+    end
 
-    System_Ext(affordmed_api, "Affordmed Evaluation API", "Protected notifications and logs endpoints")
+    subgraph app[Application Layer]
+        proxy[Next.js Route Handlers<br/>/api/notifications<br/>/api/log]
+        heap[Priority Engine<br/>Min Heap Top N]
+        logger[Logging Middleware]
+        mapper[Notification Normalizer]
+    end
 
-    System_Boundary(notification_app, "Campus Notifications Application") {
-        Container(browser_ui, "Browser UI", "Next.js App Router + React", "Renders the dashboard, priority inbox, filters, and pagination")
-        Container(state_layer, "State Layer", "Context + Hooks", "Coordinates data loading, filters, priority limits, page changes, and read state")
-        ContainerDb(local_store, "Read State Storage", "Local Storage", "Persists read notification IDs in the browser")
-        Container(proxy_routes, "Server Route Handlers", "Next.js Route Handlers", "Secures external API access and adds bearer authentication")
-        Container(priority_engine, "Priority Engine", "TypeScript Min Heap", "Selects top N notifications using priority weight and recency")
-        Container(logging_pkg, "Logging Middleware", "Reusable JavaScript Package", "Sends structured logs to the protected log endpoint")
-    }
+    subgraph external[External Services]
+        notif[Evaluation Notifications API]
+        logs[Evaluation Logs API]
+    end
 
-    Rel(user, browser_ui, "Views the app and interacts with controls")
-    Rel(browser_ui, state_layer, "Updates and renders client state")
-    Rel(state_layer, local_store, "Reads and writes read/unread state")
-    Rel(state_layer, priority_engine, "Ranks notifications", "O(n log k)")
-    Rel(browser_ui, proxy_routes, "Calls internal API routes", "HTTP / JSON")
-    Rel(proxy_routes, affordmed_api, "Requests notifications and submits logs", "Bearer token")
-    Rel(proxy_routes, logging_pkg, "Uses for server-side logging")
-    Rel(state_layer, logging_pkg, "Triggers client-side log requests through internal route")
+    user --> ui
+    ui --> state
+    state <--> storage
+    state --> heap
+    state --> proxy
+    proxy --> mapper
+    mapper --> notif
+    proxy --> logger
+    logger --> logs
+    heap --> ui
 ```
 
 Architecture image placeholder for submission:
