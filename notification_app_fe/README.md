@@ -1,4 +1,4 @@
-# Campus Notifications Frontend
+# Notification App Frontend
 
 This Next.js application implements the frontend stage of the campus hiring evaluation:
 
@@ -9,7 +9,7 @@ This Next.js application implements the frontend stage of the campus hiring eval
 
 ## Environment setup
 
-Create `frontend/.env.local` from `.env.example` and set:
+Create `.env.local` from `.env.example` and set:
 
 - `AFFORDMED_API_BASE_URL`
 - `AFFORDMED_ACCESS_TOKEN`
@@ -39,7 +39,7 @@ src/
   utils/
 ```
 
-The shared logging package is located in `../logging_middleware`.
+The shared logging package is in `../logging_middleware`.
 
 ## Architecture
 
@@ -56,11 +56,11 @@ flowchart LR
     AN --> SA[Server API Layer]
     AL --> LM[Shared Logging Middleware]
 
-    SA --> UP[Affordmed Notifications API]
+    SA --> UP[Notifications API]
     SA --> NM[Notification Normalizer]
     NM --> HP[Heap-based Priority Engine\nTop N by weight + recency]
 
-    LM --> LOG[Affordmed Logs API]
+    LM --> LOG[Logs API]
 
     HP --> UI
     LS --> UI

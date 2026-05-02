@@ -14,7 +14,7 @@ The repository is organized around the required frontend-track deliverables:
 
 - [logging_middleware](./logging_middleware)
 - [notification_system_design.md](./notification_system_design.md)
-- [frontend](./frontend)
+- [notification_app_fe](./notification_app_fe)
 - [output_images](./output_images)
 
 ## What The App Does
@@ -25,7 +25,7 @@ The application solves two parts of the problem:
 
 The Stage 1 requirement is implemented through a heap-based prioritization module in:
 
-- [frontend/src/utils/notification-heap.ts](./frontend/src/utils/notification-heap.ts)
+- [notification_app_fe/src/utils/notification-heap.ts](./notification_app_fe/src/utils/notification-heap.ts)
 
 It returns the top `N` notifications by:
 
@@ -65,7 +65,7 @@ The frontend is built with Next.js and provides:
 
 ```text
 AffordTest/
-  frontend/
+  notification_app_fe/
     src/
       api/
       app/
@@ -88,7 +88,7 @@ The frontend track explicitly assumes users are already authorized and should no
 To satisfy that while still consuming the protected evaluation APIs:
 
 1. a bearer token is generated externally through the evaluation `register` and `auth` endpoints
-2. that token is stored locally in `frontend/.env.local`
+2. that token is stored locally in `notification_app_fe/.env.local`
 3. the browser never calls the evaluation server directly
 4. Next.js route handlers attach the bearer token server-side
 
@@ -134,8 +134,8 @@ flowchart TB
     end
 
     subgraph external[External Services]
-        notif[Evaluation Notifications API]
-        logs[Evaluation Logs API]
+        notif[Notifications API]
+        logs[Logs API]
     end
 
     user --> ui
@@ -166,36 +166,36 @@ At runtime, the flow is:
 
 ### Frontend
 
-- [frontend/src/app/page.tsx](./frontend/src/app/page.tsx)
-- [frontend/src/app/priority/page.tsx](./frontend/src/app/priority/page.tsx)
-- [frontend/src/page-modules/DashboardPage.tsx](./frontend/src/page-modules/DashboardPage.tsx)
-- [frontend/src/page-modules/PriorityPage.tsx](./frontend/src/page-modules/PriorityPage.tsx)
-- [frontend/src/components/NotificationToolbar.tsx](./frontend/src/components/NotificationToolbar.tsx)
-- [frontend/src/components/NotificationListSection.tsx](./frontend/src/components/NotificationListSection.tsx)
-- [frontend/src/components/NotificationCard.tsx](./frontend/src/components/NotificationCard.tsx)
+- [notification_app_fe/src/app/page.tsx](./notification_app_fe/src/app/page.tsx)
+- [notification_app_fe/src/app/priority/page.tsx](./notification_app_fe/src/app/priority/page.tsx)
+- [notification_app_fe/src/page-modules/DashboardPage.tsx](./notification_app_fe/src/page-modules/DashboardPage.tsx)
+- [notification_app_fe/src/page-modules/PriorityPage.tsx](./notification_app_fe/src/page-modules/PriorityPage.tsx)
+- [notification_app_fe/src/components/NotificationToolbar.tsx](./notification_app_fe/src/components/NotificationToolbar.tsx)
+- [notification_app_fe/src/components/NotificationListSection.tsx](./notification_app_fe/src/components/NotificationListSection.tsx)
+- [notification_app_fe/src/components/NotificationCard.tsx](./notification_app_fe/src/components/NotificationCard.tsx)
 
 ### Data And State
 
-- [frontend/src/hooks/useNotificationsController.ts](./frontend/src/hooks/useNotificationsController.ts)
-- [frontend/src/state/notification-context.tsx](./frontend/src/state/notification-context.tsx)
-- [frontend/src/state/notification-reducer.ts](./frontend/src/state/notification-reducer.ts)
-- [frontend/src/utils/notification-types.ts](./frontend/src/utils/notification-types.ts)
-- [frontend/src/utils/notification-mappers.ts](./frontend/src/utils/notification-mappers.ts)
-- [frontend/src/utils/read-storage.ts](./frontend/src/utils/read-storage.ts)
+- [notification_app_fe/src/hooks/useNotificationsController.ts](./notification_app_fe/src/hooks/useNotificationsController.ts)
+- [notification_app_fe/src/state/notification-context.tsx](./notification_app_fe/src/state/notification-context.tsx)
+- [notification_app_fe/src/state/notification-reducer.ts](./notification_app_fe/src/state/notification-reducer.ts)
+- [notification_app_fe/src/utils/notification-types.ts](./notification_app_fe/src/utils/notification-types.ts)
+- [notification_app_fe/src/utils/notification-mappers.ts](./notification_app_fe/src/utils/notification-mappers.ts)
+- [notification_app_fe/src/utils/read-storage.ts](./notification_app_fe/src/utils/read-storage.ts)
 
 ### Server Proxy And Logging
 
-- [frontend/src/app/api/notifications/route.ts](./frontend/src/app/api/notifications/route.ts)
-- [frontend/src/app/api/log/route.ts](./frontend/src/app/api/log/route.ts)
-- [frontend/src/api/server.ts](./frontend/src/api/server.ts)
-- [frontend/src/middleware/logger.ts](./frontend/src/middleware/logger.ts)
+- [notification_app_fe/src/app/api/notifications/route.ts](./notification_app_fe/src/app/api/notifications/route.ts)
+- [notification_app_fe/src/app/api/log/route.ts](./notification_app_fe/src/app/api/log/route.ts)
+- [notification_app_fe/src/api/server.ts](./notification_app_fe/src/api/server.ts)
+- [notification_app_fe/src/middleware/logger.ts](./notification_app_fe/src/middleware/logger.ts)
 - [logging_middleware/index.js](./logging_middleware/index.js)
 
 ## Running The Project
 
 Create:
 
-- `frontend/.env.local`
+- `notification_app_fe/.env.local`
 
 with:
 
@@ -207,7 +207,7 @@ AFFORDMED_ACCESS_TOKEN=your_access_token_here
 Then run:
 
 ```bash
-cd frontend
+cd notification_app_fe
 npm install
 npm run dev
 ```
@@ -226,6 +226,7 @@ npm run build
 ```
 
 run inside the `frontend` directory.
+run inside the `notification_app_fe` directory.
 
 ## UI Screenshots
 

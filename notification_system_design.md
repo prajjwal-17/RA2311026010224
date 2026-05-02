@@ -12,7 +12,7 @@ If two notifications belong to the same category, the newer notification should 
 
 ## Overview
 
-The implementation lives in `frontend/src/utils/notification-heap.ts` and exposes:
+The implementation lives in `notification_app_fe/src/utils/notification-heap.ts` and exposes:
 
 - `getTopNotifications(notifications, limit)`
 
