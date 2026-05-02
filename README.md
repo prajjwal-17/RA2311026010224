@@ -248,6 +248,10 @@ run inside the `notification_app_fe` directory.
 
 ![Additional view](./output_images/img5.png)
 
+### Terminal View of token
+
+![Terminal View of Auth Token](./output_images/terminal.png)
+
 ## Notes
 
 - the frontend does not expose registration or login UI because the frontend track assumes pre-authorized access
